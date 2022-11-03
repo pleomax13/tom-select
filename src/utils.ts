@@ -189,3 +189,13 @@ export const addSlashes = (str:string):string => {
 export const append = ( parent:Element|DocumentFragment, node: string|Node|null|undefined ):void =>{
 	if( node ) parent.append(node);
 };
+
+export const generateId = () => {
+	let result = ''
+	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+	const charactersLength = characters.length
+	for (let i = 0; i < 20; i++) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength))
+	}
+	return result
+}

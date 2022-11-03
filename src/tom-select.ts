@@ -249,7 +249,8 @@ export default class TomSelect extends MicroPlugin(MicroEvent){
 			role:'combobox',
 			'aria-haspopup':'listbox',
 			'aria-expanded':'false',
-			'aria-controls':listboxId
+			'aria-controls':listboxId,
+			'aria-multiselectable': 'true'
 		});
 
 		const control_id	= getId(focus_node,self.inputId + '-ts-control');

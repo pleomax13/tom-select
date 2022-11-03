@@ -30,10 +30,13 @@ export default function(this:TomSelect) {
 		setTimeout(()=>{
 			var checkbox = option.querySelector('input');
 			if( checkbox instanceof HTMLInputElement ){
+				const dataAriaLabel = option.getAttribute('data-aria-label')
 				if( option.classList.contains('selected') ){
 					checkbox.checked = true;
+					option.setAttribute('aria-label', dataAriaLabel + ', выбрано,')
 				}else{
 					checkbox.checked = false;
+					option.setAttribute('aria-label', dataAriaLabel + ', не выбрано,')
 				}
 			}
 		},1);
@@ -52,11 +55,16 @@ export default function(this:TomSelect) {
 			});
 
 			checkbox.type = 'checkbox';
+			rendered.setAttribute('data-aria-label', rendered.innerText)
 			const hashed = hash_key(data[self.settings.valueField]);
+			const dataAriaLabel = rendered.getAttribute('data-aria-label')
 
 
 			if( hashed && self.items.indexOf(hashed) > -1 ){
 				checkbox.checked = true;
+				rendered.setAttribute('aria-label', dataAriaLabel + ', выбрано,')
+			} else {
+				rendered.setAttribute('aria-label', dataAriaLabel + ', не выбрано,')
 			}
 
 			rendered.prepend(checkbox);
