@@ -5,7 +5,6 @@ node_modules
 *.tmp.*
 package-lock.json
 *.lock
-build/*
 build-docs/*
 .sass-cache
 x-*
@@ -14,3 +13,4 @@ coverage/
 stats/
 src/tom-select.custom.ts
 dist
+.idea

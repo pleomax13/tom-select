@@ -15,6 +15,9 @@ Tom Select is a dynamic, framework agnostic, and lightweight (~16kb gzipped) &lt
 With autocomplete and native-feeling keyboard navigation, it's useful for tagging, contact lists, country selectors, and so on.
 Tom Select was forked from [selectize.js](https://tom-select.js.org/docs/selectize.js/) with the goal of modernizing the code base, decoupling from jQuery, and expanding functionality.
 
+### Изменения:
+- для плагина checkbox добавлен aria-label для отмеченного/неотмеченного пункта (параметры `selectedAriaMessage` и `notSelectedAriaMessage`)
+- для плагина checkbox добавлен параметр `checkboxIconHtml`
 
 ### Features
 

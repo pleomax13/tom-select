@@ -92,4 +92,8 @@ export type TomSettings = {
 	// virtual scroll plugin
 	firstUrl				: (query:string)=>any
 	shouldLoadMore			: () => boolean,
+
+	selectedAriaMessage: string,
+	notSelectedAriaMessage: string,
+	checkboxIconHtml: string
 };
