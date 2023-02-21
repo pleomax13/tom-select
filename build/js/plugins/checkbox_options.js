@@ -109,18 +109,12 @@
 	  var UpdateCheckbox = function UpdateCheckbox(option) {
 	    setTimeout(() => {
 	      var checkbox = option.querySelector('input');
-	      const selectedAriaMessage = self.settings.selectedAriaMessage || '';
-	      const notSelectedAriaMessage = self.settings.notSelectedAriaMessage || '';
 
 	      if (checkbox instanceof HTMLInputElement) {
-	        const dataAriaLabel = option.getAttribute('data-aria-label');
-
 	        if (option.classList.contains('selected')) {
 	          checkbox.checked = true;
-	          option.setAttribute('aria-label', `${dataAriaLabel}${selectedAriaMessage ? `, ${selectedAriaMessage},` : ''}`);
 	        } else {
 	          checkbox.checked = false;
-	          option.setAttribute('aria-label', `${dataAriaLabel}${notSelectedAriaMessage ? `, ${notSelectedAriaMessage},` : ''}`);
 	        }
 	      }
 	    }, 1);
@@ -139,18 +133,11 @@
 	      checkbox.type = 'checkbox';
 	      checkbox.setAttribute('tabindex', '-1');
 	      checkbox.setAttribute('aria-hidden', 'true');
-	      rendered.setAttribute('data-aria-label', rendered.innerText);
 	      const hashed = hash_key(data[self.settings.valueField]);
-	      const dataAriaLabel = rendered.getAttribute('data-aria-label');
-	      const selectedAriaMessage = self.settings.selectedAriaMessage || '';
-	      const notSelectedAriaMessage = self.settings.notSelectedAriaMessage || '';
 	      const checkboxIconHtml = self.settings.checkboxIconHtml || '';
 
 	      if (hashed && self.items.indexOf(hashed) > -1) {
 	        checkbox.checked = true;
-	        rendered.setAttribute('aria-label', `${dataAriaLabel}${selectedAriaMessage ? `, ${selectedAriaMessage},` : ''}`);
-	      } else {
-	        rendered.setAttribute('aria-label', `${dataAriaLabel}${notSelectedAriaMessage ? `, ${notSelectedAriaMessage},` : ''}`);
 	      }
 
 	      rendered.prepend(checkbox);

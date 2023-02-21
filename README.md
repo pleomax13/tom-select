@@ -18,6 +18,7 @@ Tom Select was forked from [selectize.js](https://tom-select.js.org/docs/selecti
 ### Изменения:
 - для плагина checkbox добавлен aria-label для отмеченного/неотмеченного пункта (параметры `selectedAriaMessage` и `notSelectedAriaMessage`)
 - для плагина checkbox добавлен параметр `checkboxIconHtml`
+- добавлен aria-description для выбранного варианта
 
 ### Features
 

@@ -1682,7 +1682,7 @@ class TomSelect extends MicroPlugin(MicroEvent) {
       'aria-haspopup': 'listbox',
       'aria-expanded': 'false',
       'aria-controls': listboxId,
-      'aria-multiselectable': 'true'
+      'aria-multiselectable': `${self.settings.mode === 'multi'}`
     });
     const control_id = getId(focus_node, self.inputId + '-ts-control');
     const query = "label[for='" + escapeQuery(self.inputId) + "']";
@@ -2876,7 +2876,16 @@ class TomSelect extends MicroPlugin(MicroEvent) {
       let option_el = self.getOption(opt_value, true); // toggle 'selected' class
 
       if (!self.settings.hideSelected) {
-        option_el.classList.toggle('selected', self.items.includes(opt_value));
+        const isSelected = self.items.includes(opt_value);
+        const selectedAriaMessage = this.settings.selectedAriaMessage || '';
+        const notSelectedAriaMessage = this.settings.notSelectedAriaMessage || '';
+        option_el.classList.toggle('selected', isSelected);
+
+        if (isSelected) {
+          option_el.setAttribute('aria-description', selectedAriaMessage);
+        } else {
+          option_el.setAttribute('aria-description', notSelectedAriaMessage);
+        }
       }
 
       optgroup = option[self.settings.optgroupField] || '';

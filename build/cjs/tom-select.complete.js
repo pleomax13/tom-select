@@ -1684,7 +1684,7 @@ class TomSelect extends MicroPlugin(MicroEvent) {
       'aria-haspopup': 'listbox',
       'aria-expanded': 'false',
       'aria-controls': listboxId,
-      'aria-multiselectable': 'true'
+      'aria-multiselectable': `${self.settings.mode === 'multi'}`
     });
     const control_id = getId(focus_node, self.inputId + '-ts-control');
     const query = "label[for='" + escapeQuery(self.inputId) + "']";
@@ -2878,7 +2878,16 @@ class TomSelect extends MicroPlugin(MicroEvent) {
       let option_el = self.getOption(opt_value, true); // toggle 'selected' class
 
       if (!self.settings.hideSelected) {
-        option_el.classList.toggle('selected', self.items.includes(opt_value));
+        const isSelected = self.items.includes(opt_value);
+        const selectedAriaMessage = this.settings.selectedAriaMessage || '';
+        const notSelectedAriaMessage = this.settings.notSelectedAriaMessage || '';
+        option_el.classList.toggle('selected', isSelected);
+
+        if (isSelected) {
+          option_el.setAttribute('aria-description', selectedAriaMessage);
+        } else {
+          option_el.setAttribute('aria-description', notSelectedAriaMessage);
+        }
       }
 
       optgroup = option[self.settings.optgroupField] || '';
@@ -4194,18 +4203,12 @@ function checkbox_options () {
   var UpdateCheckbox = function UpdateCheckbox(option) {
     setTimeout(() => {
       var checkbox = option.querySelector('input');
-      const selectedAriaMessage = self.settings.selectedAriaMessage || '';
-      const notSelectedAriaMessage = self.settings.notSelectedAriaMessage || '';
 
       if (checkbox instanceof HTMLInputElement) {
-        const dataAriaLabel = option.getAttribute('data-aria-label');
-
         if (option.classList.contains('selected')) {
           checkbox.checked = true;
-          option.setAttribute('aria-label', `${dataAriaLabel}${selectedAriaMessage ? `, ${selectedAriaMessage},` : ''}`);
         } else {
           checkbox.checked = false;
-          option.setAttribute('aria-label', `${dataAriaLabel}${notSelectedAriaMessage ? `, ${notSelectedAriaMessage},` : ''}`);
         }
       }
     }, 1);
@@ -4224,18 +4227,11 @@ function checkbox_options () {
       checkbox.type = 'checkbox';
       checkbox.setAttribute('tabindex', '-1');
       checkbox.setAttribute('aria-hidden', 'true');
-      rendered.setAttribute('data-aria-label', rendered.innerText);
       const hashed = hash_key(data[self.settings.valueField]);
-      const dataAriaLabel = rendered.getAttribute('data-aria-label');
-      const selectedAriaMessage = self.settings.selectedAriaMessage || '';
-      const notSelectedAriaMessage = self.settings.notSelectedAriaMessage || '';
       const checkboxIconHtml = self.settings.checkboxIconHtml || '';
 
       if (hashed && self.items.indexOf(hashed) > -1) {
         checkbox.checked = true;
-        rendered.setAttribute('aria-label', `${dataAriaLabel}${selectedAriaMessage ? `, ${selectedAriaMessage},` : ''}`);
-      } else {
-        rendered.setAttribute('aria-label', `${dataAriaLabel}${notSelectedAriaMessage ? `, ${notSelectedAriaMessage},` : ''}`);
       }
 
       rendered.prepend(checkbox);
