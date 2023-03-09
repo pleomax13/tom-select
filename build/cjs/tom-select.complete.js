@@ -2878,9 +2878,11 @@ class TomSelect extends MicroPlugin(MicroEvent) {
       let option_el = self.getOption(opt_value, true); // toggle 'selected' class
 
       if (!self.settings.hideSelected) {
+        var _this$settings, _this$settings2;
+
         const isSelected = self.items.includes(opt_value);
-        const selectedAriaMessage = this.settings.selectedAriaMessage || '';
-        const notSelectedAriaMessage = this.settings.notSelectedAriaMessage || '';
+        const selectedAriaMessage = (_this$settings = this.settings) != null && _this$settings.selectedAriaMessage ? this.settings.selectedAriaMessage() : '';
+        const notSelectedAriaMessage = (_this$settings2 = this.settings) != null && _this$settings2.notSelectedAriaMessage ? this.settings.notSelectedAriaMessage() : '';
         option_el.classList.toggle('selected', isSelected);
 
         if (isSelected) {

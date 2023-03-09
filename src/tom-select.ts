@@ -1421,8 +1421,8 @@ export default class TomSelect extends MicroPlugin(MicroEvent){
 			// toggle 'selected' class
 			if( !self.settings.hideSelected ){
 				const isSelected = self.items.includes(opt_value)
-				const selectedAriaMessage = this.settings.selectedAriaMessage || ''
-				const notSelectedAriaMessage = this.settings.notSelectedAriaMessage || ''
+				const selectedAriaMessage = this.settings?.selectedAriaMessage ? this.settings.selectedAriaMessage() : ''
+				const notSelectedAriaMessage = this.settings?.notSelectedAriaMessage ? this.settings.notSelectedAriaMessage() : ''
 
 				option_el.classList.toggle('selected', isSelected );
 

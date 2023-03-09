@@ -93,7 +93,7 @@ export type TomSettings = {
 	firstUrl				: (query:string)=>any
 	shouldLoadMore			: () => boolean,
 
-	selectedAriaMessage: string,
-	notSelectedAriaMessage: string,
+	selectedAriaMessage: () => string,
+	notSelectedAriaMessage: () => string,
 	checkboxIconHtml: string
 };
