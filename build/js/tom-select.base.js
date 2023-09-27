@@ -2582,6 +2582,8 @@
 
 
 	  setActiveOption(option, scroll = true) {
+	    const self = this;
+
 	    if (option === this.activeOption) {
 	      return;
 	    }
@@ -2597,6 +2599,7 @@
 	    });
 	    addClasses(option, 'active');
 	    if (scroll) this.scrollToOption(option);
+	    self.trigger('option_active');
 	  }
 	  /**
 	   * Sets the dropdown_content scrollTop to display the option

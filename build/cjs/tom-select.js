@@ -2578,6 +2578,8 @@ class TomSelect extends MicroPlugin(MicroEvent) {
 
 
   setActiveOption(option, scroll = true) {
+    const self = this;
+
     if (option === this.activeOption) {
       return;
     }
@@ -2593,6 +2595,7 @@ class TomSelect extends MicroPlugin(MicroEvent) {
     });
     addClasses(option, 'active');
     if (scroll) this.scrollToOption(option);
+    self.trigger('option_active');
   }
   /**
    * Sets the dropdown_content scrollTop to display the option

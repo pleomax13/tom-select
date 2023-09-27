@@ -122,6 +122,20 @@
 
 	  return arg;
 	};
+	/**
+	 * Set attributes of an element
+	 *
+	 */
+
+	const setAttr = (el, attrs) => {
+	  iterate(attrs, (val, attr) => {
+	    if (val == null) {
+	      el.removeAttribute(attr);
+	    } else {
+	      el.setAttribute(attr, '' + val);
+	    }
+	  });
+	};
 
 	/**
 	 * Converts a scalar to its best string representation
@@ -212,6 +226,12 @@
 	    });
 	    self.on('blur', () => {
 	      self.focus_node.tabIndex = self.isDisabled ? -1 : self.tabIndex;
+	    });
+	    self.on('option_active', () => {
+	      const activeOption = self.control.getAttribute('aria-activedescendant');
+	      setAttr(self.control_input, {
+	        'aria-activedescendant': activeOption
+	      });
 	    }); // give the control_input focus when the dropdown is open
 
 	    self.on('dropdown_open', () => {

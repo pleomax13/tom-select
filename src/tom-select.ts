@@ -1137,6 +1137,7 @@ export default class TomSelect extends MicroPlugin(MicroEvent){
 	 *
 	 */
 	setActiveOption( option:null|HTMLElement,scroll:boolean=true ):void{
+		const self = this;
 
 		if( option === this.activeOption ){
 			return;
@@ -1150,6 +1151,7 @@ export default class TomSelect extends MicroPlugin(MicroEvent){
 		setAttr(option,{'aria-selected':'true'});
 		addClasses(option,'active');
 		if( scroll ) this.scrollToOption(option);
+		self.trigger('option_active')
 	}
 
 	/**
